@@ -11,10 +11,11 @@
 
 ## Config
 
-| Doc          | Description     |
-| ------------ | --------------- |
-| package.json | ```"scripts": { |
+Configuración del package.json
 
-                    "start": "node server.js",
-                    "dev": "nodemon server.js"
-                }```                                                                                     |
+```
+"scripts": {
+    "start": "node server.js",
+    "dev": "nodemon server.js"
+}
+```
