@@ -1,5 +1,5 @@
-import * as User from '../models/user.model.js';
-import bcrypt from 'bcrypt';
+import * as User from '../controllers/user.controller.js';
+import bcrypt from 'bcryptjs';
 
 export const getUsers = async (req, res) => {
   res.json(await User.getAllUsers());
@@ -8,6 +8,11 @@ export const getUsers = async (req, res) => {
 export const getUser = async (req, res) => {
   const user = await User.getUserById(req.params.id);
   if (!user) return res.status(404).json({ error: 'Usuario no encontrado' });
+  const dataUser = {
+    nombre: user.nombre,
+    email: user.email,
+    createAt: user.created_at
+  }
   res.json(user);
 };
 
