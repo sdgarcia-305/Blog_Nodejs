@@ -52,3 +52,13 @@ CREATE TABLE comentarios (
   FOREIGN KEY (id_usuario) REFERENCES usuarios(id) ON DELETE CASCADE,
   FOREIGN KEY (id_blog) REFERENCES blogs(id) ON DELETE CASCADE
 );
+
+-- Tabla de favoritos
+CREATE TABLE favoritos (
+  id BIGINT AUTO_INCREMENT PRIMARY KEY,
+  id_usuario BIGINT NOT NULL,
+  id_blog BIGINT NOT NULL,
+  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  FOREIGN KEY (id_usuario) REFERENCES usuarios(id) ON DELETE CASCADE,
+  FOREIGN KEY (id_blog) REFERENCES blogs(id) ON DELETE CASCADE
+);
