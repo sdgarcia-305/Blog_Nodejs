@@ -3,3 +3,6 @@
 - Crear las interacciones en la base de datos en el modelo
 - Crear las rutas necesarias para los comentarios
 - Minimo de ser un CRUD para la tabla comentarios 
+
+
+router.post('/', upload.none(),addCategory);

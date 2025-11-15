@@ -1,42 +1,42 @@
 import pool from '../config/database.js';
 
-export const getAllFavorites = async() => {
+export const getAllFavoritesBlogs = async() => {
     const [rows] = await pool.query(`
         SELECT
-        f.id,
+        fb.id,
         u.nombre AS nombre_usuario,
         b.titulo AS titulo_blog,
-        f.created_at
-        FROM favoritos f
-        INNER JOIN usuarios u ON f.id_usuario = u.id
-        INNER JOIN blogs b ON f.id_blog = b.id
+        fb.created_at
+        FROM blogs_favoritos fb
+        INNER JOIN usuarios u ON fb.id_usuario = u.id
+        INNER JOIN blogs b ON fb.id_blog = b.id
         ORDER BY b.created_at DESC
     `);
     return rows;
 }
 
-export const getFavoriteById = async(id) => {
+export const getFavoriteBlogById = async(id) => {
     const [rows] = await pool.query(`
         SELECT
-        f.id,
+        fb.id,
         u.nombre AS nombre_usuario,
         b.titulo AS titulo_blog,
-        f.created_at
-        FROM favoritos f
-        INNER JOIN usuarios u ON f.id_usuario = u.id
-        INNER JOIN blogs b ON f.id_blog = b.id
-        WHERE f.id = ?
+        fb.created_at
+        FROM blogs_favoritos fb
+        INNER JOIN usuarios u ON fb.id_usuario = u.id
+        INNER JOIN blogs b ON fb.id_blog = b.id
+        WHERE fb.id = ?
         `, [id]);
-        return rows[0];
+    return rows[0];
 }
 
-export const createFavorite = async() => {
+export const createFavoriteBlog = async() => {
     const {
         id_usuario,
         id_blog
-    } = favorito;
+    } = blogFavorito;
     const [result] = await pool.query(`
-        INSERT INTO favoritos (
+        INSERT INTO blogs_favoritos (
            id_usuario,
            id_blog
         )
@@ -45,13 +45,13 @@ export const createFavorite = async() => {
     return { id: result.insertId, data: result }
 }
 
-export const updateFavorite = async(id, favorito) => {
+export const updateFavoriteBlog = async(id, blogFavorito) => {
     const {
         id_usuario,
         id_blog
-    } = favorito;
+    } = blogFavorito;
     const [result] = await pool.query(`
-        UPDATE favoritos
+        UPDATE blogs_favoritos
         SET
         id_usuario = ?,
         id_blog = ?
@@ -60,9 +60,9 @@ export const updateFavorite = async(id, favorito) => {
     return { result }
 }
 
-export const deleteFavorite = async(id) => {
+export const deleteFavoriteBlog = async(id) => {
     const [result] = await pool.query(`
-        DELETE FROM favoritos WHERE id = ?
+        DELETE FROM blogs_favoritos WHERE id = ?
         `, [id]);
     return result.affectedRows;
 }
