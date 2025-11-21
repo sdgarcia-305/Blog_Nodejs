@@ -8,8 +8,8 @@ export const createSubcategorySchema = z.object({
     .max(50, 'El nombre de la subcategoría debe tener como máximo 50 caracteres')
 })
 .superRefine( async (data, ctx) =>{
-    const existCatagoryName = await getSubcategoryByName(data.nombre);
-    if(existCatagoryName){
+    const existSubCatagoryName = await getSubcategoryByName(data.nombre);
+    if(existSubCatagoryName){
         ctx.addIssue({
             code: "custom",
             path: ["nombre"],
