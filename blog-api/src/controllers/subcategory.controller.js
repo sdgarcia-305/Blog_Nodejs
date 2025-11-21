@@ -1,6 +1,6 @@
 import * as Subcategory from '../models/subcategory.model.js';
 
-export const getSubCategories = async(req, res) => {
+export const getSubcategories = async(req, res) => {
     try {
         const dataSubcategories = await Subcategory.getAllSubcategories()
         res
@@ -41,6 +41,7 @@ export const getSubcategory = async (req, res) => {
 
 export const addSubcategory = async(req, res) => {
     try {
+        console.log(req);
         const subcategory = await Subcategory.createSubcategory(req.body);
         res
         .status(201)

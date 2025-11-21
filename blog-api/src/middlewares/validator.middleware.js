@@ -26,4 +26,4 @@ export const validateSchema = (schema) => async (req, res, next) => {
             error: error.message
         });
     }
-}
+};

@@ -15,14 +15,17 @@ export const createBlogSchema = z.object({
     .number('El usuario es obligatorio')
     .int("El usuario no tiene el formato valido"),
     id_categoria: z
+    .coerce
     .number('La categoria es obligatoriao')
     .int('La categoria no tiene un formato valido'),
     id_subcategoria: z
+    .coerce
     .number('La subcategoria es obligatoriao')
     .int('La subcategoria no tiene un formato valido'),
 })
 .superRefine( async(data, ctx) => {
     const userExist = await existUser(data.id_usuario);
+    console.log("userExist", userExist);
     if(!userExist){
         ctx.addIssue({
             code: "custom",
@@ -32,6 +35,7 @@ export const createBlogSchema = z.object({
     }
 
     const categoryExist = await existCategory(data.id_categoria);
+    console.log("categoryExist", categoryExist);
     if(!categoryExist){
         ctx.addIssue({
             code: "custom",
@@ -41,6 +45,7 @@ export const createBlogSchema = z.object({
     }
 
     const subcategoryExist = await existSubcategory(data.id_subcategoria);
+    console.log("subcategoryExist", subcategoryExist);
     if(!subcategoryExist){
         ctx.addIssue({
             code: "custom",

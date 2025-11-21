@@ -14,7 +14,7 @@ import {
 const router = express.Router();
 
 router.get('/', getBlogs);
-router.get('/:id', getBlog);
+router.get('/:id', getSingleBlog);
 router.post('/', upload.single('imagen'), validateSchema(createBlogSchema), createNewBlog);
 router.put('/:id', upload.single('imagen'), updateExistingBlog);
 router.delete('/:id', deleteExistingBlog);

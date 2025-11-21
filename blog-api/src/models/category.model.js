@@ -19,7 +19,10 @@ export const createCategory = async({nombre}) => {
 }
 
 export const updateCategory = async(id, { nombre }) => {
-    const category = await pool.query('UPDATE categorias SET nombre = ? WHERE id = ?', [nombre, id]);
+    const category = await pool.query(
+        'UPDATE categorias SET nombre = ? WHERE id = ?', 
+        [nombre, id]
+    );
     return { category }
 }
 
